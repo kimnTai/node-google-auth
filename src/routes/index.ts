@@ -16,7 +16,7 @@ routes.get('/', (req, res) => {
     res.send(healthCheck);
 });
 
-routes.get('/login', (_req, res) => {
+routes.post('/login', (_req, res) => {
     const token = jsonWebToken.sign({ userId: `__userId__` }, 'hexSchool', { expiresIn: '7d' });
 
     res.cookie('token', token, {

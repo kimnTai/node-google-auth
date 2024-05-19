@@ -12,8 +12,10 @@ const app = express();
 app.use(cookieParser());
 app.use(
     cors({
-        origin: ['https://node-google-auth-1tu2.onrender.com'],
-        credentials: true
+        origin(_origin, callback) {
+            callback(null, true);
+        },
+        optionsSuccessStatus: 200
     })
 );
 app.use(express.json());

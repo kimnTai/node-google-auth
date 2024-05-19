@@ -29,7 +29,7 @@
 
             loginBtn.addEventListener('click', () => {
                 fetch(domainInput.value + '/login', {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
                         credentials: 'include'
                     }
