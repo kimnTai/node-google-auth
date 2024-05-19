@@ -9,7 +9,11 @@ import Routes from '@/routes';
 
 const app = express();
 
-app.use(cookieParser());
+app.use((_, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true');
+
+    next();
+});
 app.use(
     cors({
         origin(_origin, callback) {
@@ -18,11 +22,12 @@ app.use(
         optionsSuccessStatus: 200
     })
 );
+
+app.use(cookieParser());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
-
-app.use('/public', express.static('public'));
 
 app.use(Routes);
 
