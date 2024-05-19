@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "dev": "tsx watch src/app.ts",
-        "start": "tsx app.ts"
+        "start": "tsx src/app.ts"
     },
     "devDependencies": {
         "@types/cookie-parser": "^1.4.7",
