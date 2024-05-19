@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>node-google-auth</title>
+        <style>
+            * {
+                font-size: xx-large;
+            }
+        </style>
+    </head>
+    <body style="background-color: rgb(60, 60, 60)">
+        <div>
+            <span style="color: floralwhite">domain</span>
+            <input style="margin-bottom: 15px" type="text" />
+            <br />
+            <button class="login">一般登入</button>
+            <button class="google">google 登入</button>
+            <button class="check">檢查 Token</button>
+        </div>
+
+        <script>
+            const loginBtn = document.querySelector('.login');
+            const checkBtn = document.querySelector('.check');
+            const domainInput = document.querySelector('input');
+
+            domainInput.value = 'http://localhost:3005';
+
+            loginBtn.addEventListener('click', () => {
+                fetch(domainInput.value + '/login', {
+                    method: 'GET',
+                    headers: {
+                        credentials: 'include'
+                    }
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        console.log(res);
+                    });
+            });
+
+            checkBtn.addEventListener('click', () => {
+                fetch(domainInput.value + '/check')
+                    .then(res => res.json())
+                    .then(res => {
+                        console.log(res);
+                    });
+            });
+        </script>
+    </body>
+</html>

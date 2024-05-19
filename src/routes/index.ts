@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import jsonWebToken from 'jsonwebtoken';
+
 const routes = Router();
 
 routes.get('/', (req, res) => {
@@ -12,6 +14,41 @@ routes.get('/', (req, res) => {
     };
 
     res.send(healthCheck);
+});
+
+routes.get('/login', (_req, res) => {
+    const token = jsonWebToken.sign({ userId: `__userId__` }, 'hexSchool', { expiresIn: '7d' });
+
+    res.cookie('token', token, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+        maxAge: 900000
+    }).send({
+        status: true,
+        message: '登入成功',
+        token
+    });
+});
+
+routes.get('/check', (req, res) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+        res.send({
+            status: true,
+            message: '未登入',
+            cookies: JSON.stringify(token)
+        });
+        return;
+    }
+
+    const jwtPayload = jsonWebToken.verify(token, 'hexSchool');
+
+    res.send({
+        status: true,
+        message: jwtPayload
+    });
 });
 
 routes.use((_req, res) => {
