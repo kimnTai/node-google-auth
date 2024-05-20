@@ -15,8 +15,7 @@
             <span style="color: floralwhite">domain</span>
             <input style="margin-bottom: 15px" type="text" />
             <br />
-            <button class="login">一般登入</button>
-            <button class="google">google 登入</button>
+            <button class="login">獲得 Token</button>
             <button class="check">檢查 Token</button>
         </div>
 
@@ -31,6 +30,7 @@
                 fetch(domainInput.value + '/login', {
                     method: 'POST',
                     headers: {
+                        'Content-Type': 'application/json',
                         credentials: 'include'
                     }
                 })
