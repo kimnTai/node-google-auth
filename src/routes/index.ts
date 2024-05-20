@@ -21,7 +21,7 @@ routes.post('/login', (_req, res) => {
 
     res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'None' as any,
         secure: true,
         maxAge: 900000
     }).send({

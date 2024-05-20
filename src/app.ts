@@ -19,7 +19,8 @@ app.use(
         origin(_origin, callback) {
             callback(null, true);
         },
-        optionsSuccessStatus: 200
+        optionsSuccessStatus: 200,
+        credentials: true
     })
 );
 
